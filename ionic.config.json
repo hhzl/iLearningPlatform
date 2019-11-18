@@ -1,5 +1,7 @@
 {
   "name": "iLearningPlatform",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
