@@ -8,9 +8,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-
 // Services
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
@@ -22,8 +19,14 @@ import { CommentaryService } from './services/commentary.service';
 import { HomeworkService } from './services/homework.service';
 import { TestService } from './services/test.service';
 
+// Components
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   entryComponents: [],
   imports: [
     BrowserModule,

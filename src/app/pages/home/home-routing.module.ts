@@ -3,11 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 
+// Components
+
 const routes: Routes = [
-  {
-    path: '',
-    component: HomePage
-  },
+  { path: '', component: HomePage },
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 

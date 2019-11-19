@@ -1,36 +1,57 @@
-<ion-header no-border>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button color="primary" menu="first"></ion-menu-button>
-    </ion-buttons>
+<app-menu></app-menu>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-title size="large">{{titleAllCourses}}</ion-title>
+  <ion-card *ngFor="let course of allCourses">
+    <ion-card-header>
+      <ion-card-title>{{course.idCourse}} - {{course.name}}</ion-card-title>
+      <ion-card-subtitle>Descripción: {{course.description}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ng-container *ngFor="let schedule of schedules">
+        <ion-list *ngIf="schedule.idCourse == course.idCourse">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-subtitle>Sección {{schedule.section}} ({{schedule.startTime}} - {{schedule.endTime}})
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-button expand="full" (click)="toAssign(schedule.idSchedule)">Asignar</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      </ng-container>
+    </ion-card-content>
+  </ion-card>
 
-    <ion-title>Home</ion-title>
-  </ion-toolbar>
-</ion-header>
+  <br>
+  <ion-title size="large">{{titleMyCourses}}</ion-title>
+  <ion-card *ngFor="let course of myCourses">
+    <ion-card-header>
+      <ion-card-title>{{course.idCourse}} - {{course.Course}}</ion-card-title>
+      <ion-card-subtitle>Sección {{course.section}} ({{course.startTime}} - {{course.endTime}})</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="full" [routerLink]="['course', course.idSchedule]">Ver
+        Curso</ion-button>
+      <ion-button color="danger" expand="full" (click)="onDelete(course.idAssignment)">
+        Desasignación</ion-button>
+    </ion-card-content>
+  </ion-card>
 
-<ion-menu side="start" menuId="first" contentId="principal">
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>Menu Principal</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <ion-menu-toggle>
-        <ion-item>
-          <ion-icon name="apps" slot="start"></ion-icon>
-          <ion-label>Menu Item</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-
-      <ion-menu-toggle>
-        <ion-item [routerLink]="['/']" (click)="logOut()">
-          <ion-icon name="log-out" slot="start"></ion-icon>
-          <ion-label>Cerrar sesión</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
-<ion-router-outlet id="principal" main></ion-router-outlet>
+  <ng-container *ngIf="user.isAssistant">
+    <br>
+    <ion-title size="large">{{titleAssistantCourses}}</ion-title>
+    <ion-card *ngFor="let course of assistantCourses">
+      <ion-card-header>
+        <ion-card-title>{{course.Course}} | {{course.yearSemester}}</ion-card-title>
+        <ion-card-subtitle>Sección {{course.section}} ({{course.startTime}} - {{course.endTime}})</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button expand="full" [routerLink]="['course', course.idSchedule]">Administrar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>
