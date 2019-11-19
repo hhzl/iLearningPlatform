@@ -1,0 +1,153 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ schedule.Course }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <br>
+  <!-- Begin page content -->
+  <div class="ion-padding">
+    <div class="ion-row">
+      <!-- group about -->
+      <div class="col-md-5">
+        <div class="widget" *ngIf="schedule.idProfile == user.idProfile">
+          <div class="widget-header">
+            <h3 class="widget-caption">Opciones</h3>
+          </div>
+          <div class="widget-body bordered-top bordered-sky">
+            <div class="btn-group mr-2 d-flex justify-content-center align-items-center">
+              <ion-button type="submit" size="small" [routerLink]="['student']">Alumnos</ion-button>
+              <ion-button type="submit" size="small" [routerLink]="['homework']">Actividades</ion-button>
+              <ion-button type="submit" size="small" [routerLink]="['test']">Evaluaciones</ion-button>
+            </div>
+          </div>
+        </div>
+        <div class="widget" *ngIf="schedule.idProfile != user.idProfile">
+          <div class="widget-header">
+            <h3 class="widget-caption">Opciones</h3>
+          </div>
+          <div class="widget-body bordered-top bordered-sky">
+            <div class="btn-group mr-2 d-flex justify-content-center align-items-center">
+              <ion-button type="submit" size="small" [routerLink]="['ticket']">Tickets</ion-button>
+            </div>
+          </div>
+        </div>
+        <div class="widget">
+          <div class="widget-header">
+            <h3 class="widget-caption">Descripción</h3>
+          </div>
+          <div class="widget-body bordered-top bordered-sky">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Sección: {{schedule.section}}</li>
+              <li class="list-group-item">Horario: {{schedule.startTime}} - {{schedule.endTime}}</li>
+              <li class="list-group-item">Auxiliar: {{schedule.Assistant}}</li>
+              <li class="list-group-item">
+                <ng-container *ngIf="schedule.semester == 1">Primer </ng-container>
+                <ng-container *ngIf="schedule.semester == 2">Segundo </ng-container>
+                Semestre {{schedule.yearSemester}}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="widget">
+          <div class="widget-header">
+            <h3 class="widget-caption">Acividades</h3>
+          </div>
+          <div class="widget-body bordered-top bordered-sky">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let homework of homeworks">
+                {{homework.name}}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="widget">
+          <div class="widget-header">
+            <h3 class="widget-caption">Evaluaciones</h3>
+          </div>
+          <div class="widget-body bordered-top bordered-sky">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let test of tests">
+                {{test.name}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- end group about -->
+
+      <!-- group posts -->
+      <div class="col-md-7">
+        <h1 size="large">Foro</h1>
+        <hr>
+        <!-- post state form-->
+        <div class="box profile-info n-border-top">
+          <form #formPublication="ngForm" (ngSubmit)="addPublication()">
+            <ion-textarea class="form-control input-lg p-text-area" rows="3" placeholder="¿Qué tienes en mente hoy?"
+              name="content" #content="ngModel" [(ngModel)]="publicationUser.content" maxlength="250" required>
+            </ion-textarea>
+            <div class="box-footer box-form d-flex justify-content-end">
+              <ion-button size="small" type="submit" [disabled]="!formPublication.form.valid">Post
+              </ion-button>
+            </div>
+          </form>
+        </div>
+        <!-- end post state form-->
+
+        <!-- posts-->
+        <div class="box box-widget" *ngFor="let publication of publications">
+          <div class="box box-widget">
+            <div class="user-block">
+              <span class="username"><a>{{publication.name}} {{publication.lastName}}</a></span>
+              <span class="description">Shared {{ publication.publicationDate | timeAgo}}</span>
+            </div>
+          </div>
+          <div class="box-body">
+            <p>{{publication.content}}</p>
+            <div class="attachment-block clearfix" *ngIf="publication.publicationFile != ''">
+              <div class="attachment-pushed">
+                <h4 class="attachment-heading">
+                  <a href="publication.publicationFile">{{publication.publicationFile}}</a>
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="box-footer box-comments" style="display: block;"
+            *ngFor="let commentary of publication.commentaries">
+            <div class="box-comment">
+              <div class="comment-text">
+                <span class="username">
+                  {{commentary.name}} {{commentary.lastName}}
+                  <span class="text-muted pull-right">
+                    {{commentary.publicationDate | timeAgo}}</span>
+                </span>
+                {{commentary.content}}
+              </div>
+            </div>
+          </div>
+          <div class="box-footer" style="display: block;">
+            <form>
+              <div class="img-push">
+                <form #formCommentary="ngForm" (ngSubmit)="addCommentary(publication.idPublication)">
+                  <ion-textarea class="form-control input-sm" rows="2" placeholder="Escribe un comentario..."
+                    name="content" #content="ngModel" [(ngModel)]="commentaryUser.content" maxlength="250" required>
+                  </ion-textarea>
+                  <div class="box-footer box-form d-flex justify-content-end">
+                    <ion-button size="small" type="submit" [disabled]="!formCommentary.form.valid">
+                      Post</ion-button>
+                  </div>
+                </form>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- end posts-->
+      </div>
+      <!-- end group posts -->
+    </div>
+  </div>
+</ion-content>
