@@ -15,8 +15,16 @@
           <div class="ion-padding">
             <ion-item>
               <ion-input type="text" class="form-control" placeholder="Enunciado" name="name" #name="ngModel"
-                [(ngModel)]="question.content" required>
+                [(ngModel)]="answer.content" required>
               </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Correcta</ion-label>
+              <ion-select class="custom-select" id="inputGroupSelect01" name="isRight" #isRight="ngModel"
+                [(ngModel)]="answer.isRight" required>
+                <ion-select-option value="1">Activar</ion-select-option>
+                <ion-select-option value="0">Desactivar</ion-select-option>
+              </ion-select>
             </ion-item>
           </div>
           <div class="ion-padding">

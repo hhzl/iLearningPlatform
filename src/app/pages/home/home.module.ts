@@ -9,7 +9,6 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 import { MenuComponent } from 'src/app/components/menu/menu.component';
 
-
 @NgModule({
   imports: [
     CommonModule,

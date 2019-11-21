@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { QuestionModalPage } from './question-modal.page';
+import { AnswerModalPage } from './answer-modal.page';
 
 @NgModule({
   imports: [
@@ -12,6 +12,6 @@ import { QuestionModalPage } from './question-modal.page';
     FormsModule,
     IonicModule
   ],
-  declarations: [QuestionModalPage]
+  declarations: [AnswerModalPage]
 })
-export class QuestionModalPageModule { }
+export class AnswerModalPageModule { }
