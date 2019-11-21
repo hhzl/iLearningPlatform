@@ -1,0 +1,36 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="hideModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center animated fadeIn" *ngIf="!login">
+      <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+        <form #formHomework="ngForm" (ngSubmit)="onSubmit()">
+          <div class="ion-padding">
+            <ion-item>
+              <ion-input type="text" class="form-control" placeholder="Nombre" name="name" #name="ngModel"
+                [(ngModel)]="homework.name" required>
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" class="form-control" placeholder="Punteo" name="points" #points="ngModel"
+                [(ngModel)]="homework.points" pattern="[0-9]*" maxlength="3" required>
+              </ion-input>
+            </ion-item>
+          </div>
+          <div class="ion-padding">
+            <ion-button type="submit" size="small" expand="full" [disabled]="!formHomework.form.valid">
+              Agregar
+            </ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

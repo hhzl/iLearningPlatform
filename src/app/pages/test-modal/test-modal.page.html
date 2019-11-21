@@ -1,0 +1,47 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="hideModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center animated fadeIn" *ngIf="!login">
+      <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+        <form #formHomework="ngForm" (ngSubmit)="onSubmit()">
+          <div class="ion-padding">
+            <ion-item>
+              <ion-input type="text" class="form-control" placeholder="Nombre" name="name" #name="ngModel"
+                [(ngModel)]="test.name" required>
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Estado</ion-label>
+              <ion-select class="custom-select" id="inputGroupSelect02" name="isDisabled" #isDisabled="ngModel"
+                [(ngModel)]="test.isDisabled" required>
+                <ion-select-option value="0">Habilitada</ion-select-option>
+                <ion-select-option value="1">Deshabilitada</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Aletoria</ion-label>
+              <ion-select class="custom-select" id="inputGroupSelect01" name="isRandom" #isRandom="ngModel"
+                [(ngModel)]="test.isRandom" required>
+                <ion-select-option value="0">Deshabilitada</ion-select-option>
+                <ion-select-option value="1">Habilitada</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+          <div class="ion-padding">
+            <ion-button type="submit" size="small" expand="full" [disabled]="!formHomework.form.valid">
+              Agregar
+            </ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,43 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="ion-padding">
+    <ion-button size="small" expand="full" (click)="openModalAdd()">Agregar
+    </ion-button>
+    <br>
+    <div class="table-responsive">
+      <table class="table table-striped" style="width:100%">
+        <thead>
+          <tr>
+            <th>PREGUNTA</th>
+            <th>OPCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let question of questions">
+            <td>{{question.content}}</td>
+            <td>
+              <div class="btn-group mr-2 d-flex justify-content-center align-items-center">
+                <ion-button size="small" type="button" class="btn btn-sm btn-outline-secondary"
+                  [routerLink]="[question.idQuestion, 'answer']">RESPUESTAS</ion-button>
+                <ion-button size="small" (click)="sendQuestionID(question.idQuestion)" data-toggle="modal"
+                  data-target="#editQuestion">EDITAR</ion-button>
+                <ion-button size="small" (click)="onDelete(question.idQuestion)">ELIMINAR</ion-button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ion-content>

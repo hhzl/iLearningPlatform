@@ -1,71 +1,77 @@
-<ion-grid>
-  <ion-row class="ion-justify-content-center animated fadeIn" *ngIf="!login">
-    <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
-      <div class="ion-text-center">
-        <h4>{{title}}</h4>
-        <p class="text-muted">Acceder a tu cuenta</p>
-      </div>
-      <form #formSignin="ngForm" (ngSubmit)="signin()">
-        <div class="ion-padding">
-          <ion-item>
-            <ion-input type="email" class="form-control" placeholder="Dirección de correo electrónico" name="email"
-              #email="ngModel" [(ngModel)]="userSignin.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-            </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type="password" class="form-control" placeholder="Contraseña" name="password" #password="ngModel"
-              [(ngModel)]="userSignin.password" required></ion-input>
-          </ion-item>
-          <p class="center text-muted">¿Nuevo en el sitio?
-            <a (click)="alternateLog()" style="cursor: pointer;">Crear una cuenta</a>
-          </p>
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center animated fadeIn" *ngIf="!login">
+      <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+        <div class="ion-text-center">
+          <h4>{{title}}</h4>
+          <p class="text-muted">Acceder a tu cuenta</p>
         </div>
-        <div class="ion-padding">
-          <ion-button type="submit" size="default" expand="block" [disabled]="!formSignin.form.valid">Iniciar sesión
-          </ion-button>
+        <form #formSignin="ngForm" (ngSubmit)="signin()">
+          <div class="ion-padding">
+            <ion-item>
+              <ion-input type="email" class="form-control" placeholder="Dirección de correo electrónico" name="email"
+                #email="ngModel" [(ngModel)]="userSignin.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                required>
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="password" class="form-control" placeholder="Contraseña" name="password"
+                #password="ngModel" [(ngModel)]="userSignin.password" required></ion-input>
+            </ion-item>
+            <p class="center text-muted">¿Nuevo en el sitio?
+              <a (click)="alternateLog()" style="cursor: pointer;">Crear una cuenta</a>
+            </p>
+          </div>
+          <div class="ion-padding">
+            <ion-button type="submit" size="default" expand="block" [disabled]="!formSignin.form.valid">Iniciar sesión
+            </ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center animated fadeIn" *ngIf="login">
+      <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+        <div class="ion-text-center">
+          <h4>{{title}}</h4>
+          <p class="text-muted">Crea una cuenta nueva</p>
         </div>
-      </form>
-    </ion-col>
-  </ion-row>
-  <ion-row class="ion-justify-content-center animated fadeIn" *ngIf="login">
-    <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
-      <div class="ion-text-center">
-        <h4>{{title}}</h4>
-        <p class="text-muted">Crea una cuenta nueva</p>
-      </div>
-      <form #formSignup="ngForm" (ngSubmit)="signup()">
-        <div class="ion-padding">
-          <ion-item>
-            <ion-input type="text" class="form-control" placeholder="Carnet" name="identityCard" #identityCard="ngModel"
-              [(ngModel)]="userSignup.identityCard" pattern="[0-9]*" minlength="9" maxlength="9" required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type="text" class="form-control" placeholder="Nombre" name="name" #name="ngModel"
-              [(ngModel)]="userSignup.name" required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type="text" class="form-control" placeholder="Apellido" name="lastName" #lastName="ngModel"
-              [(ngModel)]="userSignup.lastName" required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type="email" class="form-control" placeholder="Dirección de correo electrónico" name="email"
-              #email="ngModel" [(ngModel)]="userSignup.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-            </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type="password" class="form-control" placeholder="Contraseña" name="password" #password="ngModel"
-              [(ngModel)]="userSignup.password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[#|$|%|&]).{8,}" required>
-            </ion-input>
-          </ion-item>
-          <p class="center text-muted">¿Ya tienes una cuenta?
-            <a (click)="alternateLog()" style="cursor: pointer;">Iniciar sesión</a>
-          </p>
-        </div>
-        <div class="ion-padding">
-          <ion-button type="submit" size="default" expand="block" [disabled]="!formSignup.form.valid">Regístrate
-          </ion-button>
-        </div>
-      </form>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+        <form #formSignup="ngForm" (ngSubmit)="signup()">
+          <div class="ion-padding">
+            <ion-item>
+              <ion-input type="text" class="form-control" placeholder="Carnet" name="identityCard"
+                #identityCard="ngModel" [(ngModel)]="userSignup.identityCard" pattern="[0-9]*" minlength="9"
+                maxlength="9" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" class="form-control" placeholder="Nombre" name="name" #name="ngModel"
+                [(ngModel)]="userSignup.name" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" class="form-control" placeholder="Apellido" name="lastName" #lastName="ngModel"
+                [(ngModel)]="userSignup.lastName" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="email" class="form-control" placeholder="Dirección de correo electrónico" name="email"
+                #email="ngModel" [(ngModel)]="userSignup.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                required>
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="password" class="form-control" placeholder="Contraseña" name="password"
+                #password="ngModel" [(ngModel)]="userSignup.password"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[#|$|%|&]).{8,}" required>
+              </ion-input>
+            </ion-item>
+            <p class="center text-muted">¿Ya tienes una cuenta?
+              <a (click)="alternateLog()" style="cursor: pointer;">Iniciar sesión</a>
+            </p>
+          </div>
+          <div class="ion-padding">
+            <ion-button type="submit" size="default" expand="block" [disabled]="!formSignup.form.valid">Regístrate
+            </ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

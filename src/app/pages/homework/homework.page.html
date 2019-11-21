@@ -1,0 +1,44 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="ion-padding">
+    <ion-button size="small" expand="full" (click)="openModalAdd()">Agregar
+    </ion-button>
+    <br>
+    <div class="table-responsive">
+      <table class="table table-striped" style="width:100%">
+        <thead>
+          <tr>
+            <th>NOMBRE</th>
+            <th>PUNTEO</th>
+            <th>OPCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let homework of homeworks">
+            <td>{{homework.name}}</td>
+            <td>{{homework.points}}</td>
+            <td>
+              <div class="btn-group mr-2 d-flex justify-content-center align-items-center">
+                <ion-button size="small" (click)="sendHomeworkID(homework.idHomework)" data-toggle="modal"
+                  data-target="#editHomework">EDITAR
+                </ion-button>
+                <ion-button size="small" (click)="onDelete(homework.idHomework)">ELIMINAR</ion-button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ion-content>

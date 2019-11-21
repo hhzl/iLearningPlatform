@@ -1,0 +1,52 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="ion-padding">
+    <ion-button size="small" expand="full" (click)="openModalAdd()">Agregar
+    </ion-button>
+    <br>
+    <div class="table-responsive">
+      <table class="table table-striped" style="width:100%">
+        <thead>
+          <tr>
+            <th>NOMBRE</th>
+            <th>ESTADO</th>
+            <th>ALETORIA</th>
+            <th>OPCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let test of tests">
+            <td>{{test.name}}</td>
+            <td>
+              <ng-container *ngIf="test.isDisabled == 1">DESHABILITADA </ng-container>
+              <ng-container *ngIf="test.isDisabled == 0">HABILITADA </ng-container>
+            </td>
+            <td>
+              <ng-container *ngIf="test.isRandom == 0">DESHABILITADA </ng-container>
+              <ng-container *ngIf="test.isRandom == 1">HABILITADA </ng-container>
+            </td>
+            <td>
+              <div class="btn-group mr-2 d-flex justify-content-center align-items-center">
+                <ion-button size="small" [routerLink]="[test.idTest, 'question']">PREGUNTAS</ion-button>
+                <ion-button size="small" (click)="sendTestID(test.idTest)" data-toggle="modal" data-target="#editTest">
+                  EDITAR</ion-button>
+                <ion-button size="small" (click)="onDelete(test.idTest)">ELIMINAR</ion-button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ion-content>

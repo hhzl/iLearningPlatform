@@ -1,0 +1,36 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding color-div">
+  <div>
+    <table style="width:100%">
+      <thead>
+        <tr>
+          <th>CARNET</th>
+          <th>NOMBRE</th>
+          <th>APELLIDO</th>
+          <th>OPCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td style="vertical-align: middle;">{{user.identityCard}}</td>
+          <td style="vertical-align: middle;">{{user.name}}</td>
+          <td style="vertical-align: middle;">{{user.lastName}}</td>
+          <td style="vertical-align: middle;">
+            <div class="btn-group mr-2 d-flex justify-content-center align-items-center">
+              <ion-button size="small">Asistencia</ion-button>
+              <ion-button size="small">Mensaje</ion-button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>
